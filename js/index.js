@@ -91,3 +91,82 @@ function suma(x, y) {
 
 localStorage.setItem("resultado", suma(4, 5));*/
 
+/* // como guardar un array en el localStorage, se puede guardar de un producto o todo el arreglo junto, primero hacemos un forof o foreach, crear una funcion, esa funcion va a traer a la clave y al valor de este arreglo, dentro un loscalStorage.setItem con la clave y el valor nuevamente, hacvemos un forof de la funcion que creamos recorriendo cada producto.id y pasarlo a JSON.stringuify al producto, por ultimo hacer el localStore de productos y JSON de productos.
+
+const guardarStorage = (clave, valor) => { localStorage.setItem(clave, valor) };
+
+const productos = [
+    { id: 1, producto: "arroz", precio: 125 },
+    { id: 2, producto: "fideos", precio: 70 },
+    { id: 3, producto: "pan", precio: 50 },
+    { id: 4, producto: "flan", precio: 100},
+]
+for (const producto of productos) {
+    guardarStorage(producto.id, JSON.stringify(producto));
+}
+
+localStorage.setItem("productos", JSON.stringify(productos)) */
+
+//cuando creo una variable y esta la paso por el localstorage sin nungun valor va a salir NULL,que no hay ningun valor, NULL tiene la propiedad de FALSE
+/* let usuario;
+
+let usuarioStorage = sessionStorage.getItem("usuario");
+
+if (usuarioStorage) {
+    let mensaje = `Bienvenido ${usuarioStorage}`;
+
+} else {
+    usuario = prompt("ingrese su nombre");
+    sessionStorage.setItem("usuario", usuario);
+    alert("bienvenido, es tu primera vez?")
+}; */
+// si usamos localStorage en este ejercicio de alerta, quedara guardado el nombre andres, para esto vamos a usar el sessionStorage.
+
+//getItem: es parta traer los valores
+//setIem : para guardar la informacion
+
+// carrito de compras
+
+const productos = [
+    { id: 1, producto: "arroz", precio: 125 },
+    { id: 2, producto: "fideos", precio: 70 },
+    { id: 3, producto: "pan", precio: 50 },
+    { id: 4, producto: "flan", precio: 100 },
+];
+// del carrito de compras traeremos con el getItem 
+
+let carritoStorage = localStorage.getItem("productos");
+// creo la variable carrito que es lo que va a recorrer los prioductos
+let carrito = [];
+//hacemos un if donde el JSON.parse, parsea al arreglo
+if (carritoStorage) {
+    carrito = JSON.parse(carritoStorage);
+}
+//ahora hacemos un if donde el carrito sea mayor a 0 aparecera un mensaje dodne estamos interactuando con el index.html, donde agreguemos algo al carrito aparecera en lña pantalla. foreach, seguido de la variable item, donde ahi creamos el mensaje qwue aprecera en la pantalla cuando agreguemos algo, con un "div"; 
+if (carrito.length > 0) {
+    carrito.forEach(element => {
+        let item = document.createElement("div");
+        item.innerHTML = `
+                          <h2>id: ${elemet.id}</h2>
+                          <p>nombre: ${element.nombre}</p>
+                          <b>precio: ${element.precio}</b>  
+        `;
+ // ahora hay que poner asl padre de  donde queremos que paresca nuestro mensaje cuando agreguemos algo a nuestro carrito       
+        document.body.append(item);
+    });
+ // ahora tenemos que hacer la respuesta sio no agrego nada al carrito   
+} else {
+    let item = document.createElement("div");
+    item.innerHTML = "No hay productos";
+    document.body.append(item);
+}
+//hacemos un boton para eliminar con un a alert
+let boton = document.getElementById("boton");
+// una vez que agrego el boton, creo un a funcion con lo que tiene que hacer el boton una vez apretado
+boton.addEventListener("click", () => {
+    localStorage.clear();
+    alert("carrito eliminado");
+})
+
+// este es el que tengo que usar para el projecto
+
